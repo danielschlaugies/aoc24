@@ -1,7 +1,7 @@
+use std::collections::HashMap;
 use std::io::Read;
 use std::str::FromStr;
 
-//noinspection DuplicatedCode
 fn main() -> Result<(), ()> {
     let mut args = std::env::args();
 
@@ -43,12 +43,19 @@ fn main() -> Result<(), ()> {
                 }
             });
 
-            a.sort();
-            b.sort();
+            let mut hm: HashMap<i32, i32> = HashMap::new();
+            b.iter().for_each(|x| {
+                let n = hm.get(x).unwrap_or(&0);
+                hm.insert(*x, n + 1);
+            });
 
-            let iter = a.iter().zip(b.iter());
-            let result: i32 = iter.map(|(x, y)| (x - y).abs()).sum();
+            let result: i32 = a.iter().map(|x| {
+                let o = hm.get(x).unwrap_or(&0) ;
+                x * o
+            }).sum();
+
             println!("{}", result);
+
             Ok(())
         }
 
