@@ -17,4 +17,7 @@ name = "day02-first"
 [[bin]]
 name = "day02-second"
 
+[[bin]]
+name = "day03-first"
+
 [dependencies]
